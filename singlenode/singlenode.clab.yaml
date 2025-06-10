@@ -1,0 +1,7 @@
+name: singlenode
+
+topology:
+  nodes:
+    tor1:
+      kind: ceos
+      image: ceos:4.34.0f.arm
