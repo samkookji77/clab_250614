@@ -1,0 +1,1 @@
+clab completion bash | sudo tee /etc/bash_completion.d/containerlab && echo -e "\n# Containerlab alias with autocompletion\nalias clab=containerlab\nif type __start_containerlab &>/dev/null; then\n    complete -o default -F __start_containerlab clab\nfi" >> ~/.bashrc && source ~/.bashrc
