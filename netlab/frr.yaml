@@ -1,0 +1,19 @@
+# Source: https://netlab.tools/example/github/
+# This is a very simple topology with two FRR routers.
+# You can replace 'frr' with 'eos' for Arista cEOS, assuming you have the image.
+
+provider: clab
+defaults:
+  device: frr # 여기를 'eos'로 변경하면 됩니다.
+  module: [ ospf ] # 기본적으로 OSPF를 구성하도록 설정
+
+nodes: [ r1, r2 ] # r1과 r2 두 개의 노드 정의
+
+links: [ r1, r2, r1-r2 ]
+# 이 'links' 정의는 다음과 동일합니다:
+# - endpoints: ["r1:eth1"] # r1에 스텁 네트워크 링크
+# - endpoints: ["r2:eth1"] # r2에 스텁 네트워크 링크
+# - endpoints: ["r1:eth2", "r2:eth2"] # r1과 r2 사이에 P2P 링크
+# netlab은 'r1', 'r2'처럼 노드 이름만 있는 링크를 만나면
+# 해당 노드에 스텁(stub) 링크(관리용 또는 추가 네트워크 연결용)를 생성하고
+# 'r1-r2'처럼 노드 이름-노드 이름 형식은 해당 노드들 간의 P2P 링크를 생성합니다.

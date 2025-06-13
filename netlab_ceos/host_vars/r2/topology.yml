@@ -1,0 +1,50 @@
+# Ansible inventory created from ['/home/ubuntu/netlab_ceos/ceos.yaml', 'package:topology-defaults.yml']
+#
+
+%YAML 1.1
+---
+interfaces:
+- ipv4: 172.16.1.2/24
+  linkindex: 2
+  role: stub
+  type: stub
+  bridge: netlab_ceo_2
+  name: r2 -> stub
+  ifindex: 1
+  ifname: Ethernet1
+  clab:
+    name: et1
+  neighbors: []
+- ipv4: 10.1.0.2/30
+  linkindex: 3
+  type: p2p
+  name: r2 -> r1
+  ifindex: 2
+  ifname: Ethernet2
+  clab:
+    name: et2
+  neighbors:
+  - ipv4: 10.1.0.1/30
+    ifname: Ethernet2
+    node: r1
+clab:
+  kind: ceos
+  env:
+    INTFTYPE: et
+    CLAB_MGMT_VRF: management
+box: ceos:4.33.1F
+role: router
+af:
+  ipv4: true
+mgmt:
+  ifname: Management0
+  mac: 08:4f:a9:02:00:00
+  ipv4: 192.168.121.102
+hostname: clab-netlab_ceos-r2
+loopback:
+  type: loopback
+  neighbors: []
+  virtual_interface: true
+  ifindex: 0
+  ifname: Loopback0
+  ipv4: 10.0.0.2/32

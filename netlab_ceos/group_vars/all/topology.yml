@@ -1,0 +1,126 @@
+# Ansible inventory created from ['/home/ubuntu/netlab_ceos/ceos.yaml', 'package:topology-defaults.yml']
+#
+
+%YAML 1.1
+---
+netlab_provider: clab
+netlab_name: netlab_ceos
+paths_validate:
+- /usr/local/lib/python3.12/dist-packages/netsim/validate
+paths_plugin:
+- /home/ubuntu/netlab_ceos
+- /home/ubuntu/.netlab
+- /usr/local/lib/python3.12/dist-packages/netsim/extra
+paths_custom:
+  dirs:
+  - /home/ubuntu/netlab_ceos
+  - /home/ubuntu/.netlab
+  - /usr/local/lib/python3.12/dist-packages/netsim/extra
+  files:
+  - "{{ custom_config + '/' + inventory_hostname + '.' + netlab_device_type + '-'
+    + node_provider + '.j2' }}"
+  - "{{ custom_config + '/' + inventory_hostname + '.' + netlab_device_type + '.j2'
+    }}"
+  - "{{ custom_config + '/' + inventory_hostname + '.j2' }}"
+  - "{{ custom_config + '/' + inventory_hostname + '.cfg' }}"
+  - "{{ custom_config + '/' + netlab_device_type + '-' + node_provider + '.j2' }}"
+  - "{{ custom_config + '/' + netlab_device_type + '.j2' }}"
+  - "{{ custom_config + '/' + ansible_network_os + '-' + node_provider + '.j2' }}"
+  - "{{ custom_config + '/' + ansible_network_os + '.j2' }}"
+  - "{{ custom_config + '.' + inventory_hostname + '.' + netlab_device_type + '.j2'
+    }}"
+  - "{{ custom_config + '.' + inventory_hostname + '.' + ansible_network_os + '.j2'
+    }}"
+  - "{{ custom_config + '.' + inventory_hostname + '.j2' }}"
+  - "{{ custom_config + '.' + netlab_device_type + '.j2' }}"
+  - "{{ custom_config + '.' + ansible_network_os + '.j2' }}"
+  - "{{ custom_config + '.j2' }}"
+  tasks:
+  - '{{ custom_config }}/deploy-{{ inventory_hostname }}.yml'
+  - '{{ custom_config }}/deploy.{{ netlab_device_type }}-{{ node_provider }}.yml'
+  - '{{ custom_config }}/deploy.{{ netlab_device_type }}.yml'
+  - '{{ custom_config }}/deploy.{{ ansible_network_os }}-{{ node_provider }}.yml'
+  - '{{ custom_config }}/deploy.{{ ansible_network_os }}.yml'
+  - '{{ custom_config }}/deploy.yml'
+paths_deploy:
+  dirs:
+  - /usr/local/lib/python3.12/dist-packages/netsim/ansible/tasks
+  tasks_generic:
+  - deploy-config/{{ netlab_device_type }}-{{ node_provider }}.yml
+  - deploy-config/{{ netlab_device_type }}.yml
+  - deploy-config/{{ ansible_network_os }}-{{ node_provider }}.yml
+  - deploy-config/{{ ansible_network_os }}.yml
+  files:
+  - '{{ netlab_device_type }}/{{ config_module }}-{{ provider|default(netlab_provider)
+    }}.yml'
+  - '{{ netlab_device_type }}/{{ config_module }}.yml'
+  - deploy-config/{{ netlab_device_type }}-{{ provider|default(netlab_provider) 
+    }}.yml
+  - deploy-config/{{ netlab_device_type }}.yml
+  - '{{ ansible_network_os }}/{{ config_module }}-{{ provider|default(netlab_provider)
+    }}.yml'
+  - '{{ ansible_network_os }}/{{ config_module }}.yml'
+  - deploy-config/{{ ansible_network_os }}-{{ provider|default(netlab_provider) 
+    }}.yml
+  - deploy-config/{{ ansible_network_os }}.yml
+paths_templates:
+  dirs:
+  - /usr/local/lib/python3.12/dist-packages/netsim/ansible/templates
+  - /usr/local/lib/python3.12/dist-packages/netsim/daemons
+paths_t_files:
+  files:
+  - '{{config_module}}/{{netlab_device_type}}-{{provider|default(netlab_provider)}}.j2'
+  - '{{config_module}}/{{netlab_device_type}}.j2'
+  - '{{config_module}}.{{netlab_device_type}}.j2'
+  - '{{config_module}}/{{ansible_network_os}}-{{provider|default(netlab_provider)}}.j2'
+  - '{{config_module}}/{{ansible_network_os}}.j2'
+  - '{{config_module}}.{{ansible_network_os}}.j2'
+  - '{{netlab_device_type}}/{{config_module}}.j2'
+paths_ready:
+  dirs:
+  - /usr/local/lib/python3.12/dist-packages/netsim/ansible/tasks/readiness-check
+  files:
+  - '{{netlab_device_type}}-{{provider|default(netlab_provider)}}.yml'
+  - '{{netlab_device_type}}.yml'
+  - '{{ansible_network_os}}-{{provider|default(netlab_provider)}}.yml'
+  - '{{ansible_network_os}}.yml'
+paths_collect:
+  dirs:
+  - /usr/local/lib/python3.12/dist-packages/netsim/ansible/tasks/fetch-config
+pools:
+  lan:
+    ipv4: 172.16.0.0/16
+    prefix: 24
+  loopback:
+    ipv4: 10.0.0.0/24
+    prefix: 32
+  p2p:
+    ipv4: 10.1.0.0/16
+    prefix: 30
+  router_id:
+    ipv4: 10.0.0.0/24
+    prefix: 32
+  mgmt:
+    ipv4: 192.168.121.0/24
+    start: 100
+    mac: 08-4F-A9-00-00-00
+    prefix: 24
+  l2only: {}
+  vrf_loopback:
+    ipv4: 10.2.0.0/24
+    prefix: 32
+hosts:
+  r1:
+    loopback:
+    - 10.0.0.1
+    ipv4:
+    - 10.0.0.1
+    - 172.16.0.1
+    - 10.1.0.1
+  r2:
+    loopback:
+    - 10.0.0.2
+    ipv4:
+    - 10.0.0.2
+    - 172.16.1.2
+    - 10.1.0.2

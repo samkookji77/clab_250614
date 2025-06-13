@@ -1,0 +1,20 @@
+graph {
+  bgcolor="transparent"
+  node [shape=box, style="rounded,filled" fontname=Verdana]
+  edge [fontname=Verdana labelfontsize=10 labeldistance=1.5]
+  "r1" [
+    label="r1 [eos]\n10.0.0.1/32"
+    fillcolor="#ff9f01"
+    margin="0.3,0.1"
+  ]
+  "r2" [
+    label="r2 [eos]\n10.0.0.2/32"
+    fillcolor="#ff9f01"
+    margin="0.3,0.1"
+  ]
+  "netlab_ceo_1" [style=filled fillcolor="#d1bfab" fontsize=11 margin="0.3,0.1" label="172.16.0.0/24"]
+ "r1" -- "netlab_ceo_1" [  ]
+  "netlab_ceo_2" [style=filled fillcolor="#d1bfab" fontsize=11 margin="0.3,0.1" label="172.16.1.0/24"]
+ "r2" -- "netlab_ceo_2" [  ]
+ "r1" -- "r2" [ ]
+}
