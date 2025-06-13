@@ -1,0 +1,12 @@
+name: dualnode
+topology:
+  nodes:
+    srl:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.10
+    ceos:
+      kind: ceos
+      image: ceos:4.34.0f.arm
+
+  links:
+    - endpoints: ["srl:ethernet-1/1", "ceos:eth1"]
